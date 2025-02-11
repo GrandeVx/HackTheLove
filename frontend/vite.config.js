@@ -7,10 +7,26 @@ import path from 'path'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   preview: {
-    allowedHosts: ["hack-the-love-of-tdm6q9-b74897-89-168-27-79.traefik.me"],
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      '.traefik.me',
+    ],
+    cors: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   server: {
-    allowedHosts: ["hack-the-love-of-tdm6q9-b74897-89-168-27-79.traefik.me"],
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      '.traefik.me',
+    ],
+    cors: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   build: {
     target: 'esnext',
