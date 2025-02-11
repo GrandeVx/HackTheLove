@@ -21,7 +21,7 @@ var RequestPerSecond, _ = strconv.Atoi(utils.GetEnv("REQUEST_PER_SECOND", "50"))
 
 // Security configuration
 var JwtSecret = []byte(utils.GetEnv("SECRET_KEY", "secretkey"))
-var GoogleClientID = utils.GetEnv("GOOGLE_CLIENT_ID", "443648413060-db3ivje6uto4h1jf0f11e13hb4opmhep.apps.googleusercontent.com")
+var GoogleClientID = utils.GetEnv("GOOGLE_CLIENT_ID", "443648413060-db3ivje6uto4h1jf0f11e13hb4opmhep.apps.googleusercontent.com2")
 
 // Server
 var AppPort = utils.GetEnv("APP_PORT", "8080")
