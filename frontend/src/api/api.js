@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'http://hack-the-love-of-tdm6q9-0083e6-89-168-27-79.traefik.me',
+  baseURL: 'https://hack-the-love-of-tdm6q9-e5049c-89-168-27-79.traefik.me',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
