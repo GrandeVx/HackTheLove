@@ -8,7 +8,9 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   preview: {
     allowedHosts: [
-      'hack-the-love-server-mintfw-ca9ac0-89-168-27-79.traefik.me'
+      'hack-the-love-server-mintfw-ca9ac0-89-168-27-79.traefik.me',
+      'hackthe.love'
+      '*'
     ]
   },
   build: {
