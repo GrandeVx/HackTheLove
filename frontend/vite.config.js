@@ -7,10 +7,10 @@ import path from 'path'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   preview: {
-    allowedHosts: true,
+    allowedHosts: ["hack-the-love-of-tdm6q9-b74897-89-168-27-79.traefik.me"],
   },
   server: {
-    allowedHosts: true,
+    allowedHosts: ["hack-the-love-of-tdm6q9-b74897-89-168-27-79.traefik.me"],
   },
   build: {
     target: 'esnext',
