@@ -7,26 +7,16 @@ import path from 'path'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   preview: {
-    allowedHosts: [
-      'localhost',
-      '127.0.0.1',
-      '.traefik.me',
-    ],
-    cors: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
+    host: '0.0.0.0',
+    port: 4000,
+    strictPort: true,
+    allowedHosts: 'all',
   },
   server: {
-    allowedHosts: [
-      'localhost',
-      '127.0.0.1',
-      '.traefik.me',
-    ],
-    cors: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
+    host: '0.0.0.0',
+    port: 4000,
+    strictPort: true,
+    allowedHosts: 'all',
   },
   build: {
     target: 'esnext',
