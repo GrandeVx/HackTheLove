@@ -36,6 +36,7 @@ services:
       BATCH_SIZE: ${BATCH_SIZE}
       MAX_PHOTO_NUMBER: ${MAX_PHOTO_NUMBER}
       REQUEST_PER_SECOND: ${REQUEST_PER_SECOND}
+      ALLOWED_ORIGINS: "https://hackthe.love,http://localhost:5173"
     depends_on:
       - db-hackthelove
     ports:

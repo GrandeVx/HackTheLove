@@ -26,7 +26,7 @@ var GoogleClientID = utils.GetEnv("GOOGLE_CLIENT_ID", "443648413060-db3ivje6uto4
 // Server
 var AppPort = utils.GetEnv("APP_PORT", "8080")
 var GINMODE = utils.GetEnv("GIN_MODE", "debug")
-var AllowedOrigins = strings.Split(utils.GetEnv("ALLOWED_ORIGINS", "http://localhost:5173,http://frontend:80,http://localhost:80,http://localhost"), ",")
+var AllowedOrigins = strings.Split(utils.GetEnv("ALLOWED_ORIGINS", "http://localhost:5173,http://frontend:80,http://localhost:80,http://localhost,https://hackthe.love"), ",")
 
 // Database
 var DatabaseName = utils.GetEnv("DB_DATABASE", "postgres")

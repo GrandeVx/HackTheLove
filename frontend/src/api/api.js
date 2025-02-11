@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'https://hack-the-love-of-tdm6q9-e5049c-89-168-27-79.traefik.me',
+  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8080',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
