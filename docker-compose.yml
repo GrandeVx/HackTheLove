@@ -48,16 +48,13 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     restart: unless-stopped
-    depends_on:
-      - backend
     environment:
-      VITE_API_URL: ${BACKEND_URL}
-      BACKEND_URL: ${BACKEND_URL}
-      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
-      TIME_RELEASE_MATCH: ${TIME_RELEASE_MATCH}
+      - VITE_API_URL=${BACKEND_URL}
+      - BACKEND_URL=${BACKEND_URL}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - TIME_RELEASE_MATCH=${TIME_RELEASE_MATCH}
     ports:
       - "${APP_PORT_FE}:80"
-      - "4000:4000"
     networks:
       - app_network
 

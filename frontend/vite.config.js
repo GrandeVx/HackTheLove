@@ -25,6 +25,7 @@ export default defineConfig({
     minify: 'esbuild',
     cssCodeSplit: true,
     assetsInlineLimit: 4096,
+    base: '/',
     rollupOptions: {
       output: {
         manualChunks(id) {
