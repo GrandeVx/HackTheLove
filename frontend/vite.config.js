@@ -10,6 +10,7 @@ export default defineConfig({
     allowedHosts: [
       'hack-the-love-server-mintfw-ca9ac0-89-168-27-79.traefik.me',
       'hackthe.love',
+      'hack-the-love-of-tdm6q9-12c719-89-168-27-79.traefik.me',
       '*'
     ]
   },
