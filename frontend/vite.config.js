@@ -6,6 +6,11 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  preview: {
+    allowedHosts: [
+      'hack-the-love-server-mintfw-ca9ac0-89-168-27-79.traefik.me'
+    ]
+  },
   build: {
     target: 'esnext',
     outDir: 'dist',
