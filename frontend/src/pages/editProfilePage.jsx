@@ -112,7 +112,7 @@ function UpdateProfile() {
               id="input-phone"
               defaultValue={user?.user_info?.phone || ''}
               className="bg-white focus:outline-pink-500 text-black rounded-lg h-10 py-3 px-4 block w-full"
-              placeholder="+39 123456790 (prefisso non obbligatorio)"
+              placeholder="+39123456790 (prefisso non obbligatorio)"
             />
           </div>
 
