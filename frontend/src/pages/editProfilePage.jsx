@@ -22,9 +22,6 @@ function UpdateProfile() {
           showToast(resultUser.error, 'error');
         }
 
-        const resultPhoto = await getPhotos();
-        const photos = resultPhoto.data;
-
         if (resultPhoto?.error) {
           showToast(resultPhoto.error, 'error');
         }
