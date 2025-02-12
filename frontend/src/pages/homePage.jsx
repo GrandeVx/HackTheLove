@@ -74,6 +74,7 @@ function HomePage() {
 
       if (!Array.isArray(response.data) || response.data.length === 0) {
         showToast('Nessun match trovato', 'info');
+        setLoading(false);
         return;
       }
 
