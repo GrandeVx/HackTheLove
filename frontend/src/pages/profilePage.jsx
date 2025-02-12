@@ -110,7 +110,7 @@ export default function ProfilePage() {
 
         <div className="text-center mt-5">
           <h3 className="text-xl font-bold text-black">
-            {user.user?.given_name || 'Nome non disponibile'}
+            {user.user?.given_name + ' ' + user.user?.family_name || 'Nome non disponibile'}
           </h3>
           <p className="text-black text-sm">
             {user.user_info?.bio || 'Nessuna bio disponibile'}
