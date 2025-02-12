@@ -1,0 +1,4 @@
+Entrare nel container da bash e eseguire
+
+- `psql -U username -d postgres`
+- `TRUNCATE TABLE users CASCADE;`

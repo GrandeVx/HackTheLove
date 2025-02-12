@@ -10,8 +10,8 @@ import (
 // App
 var LogLevel = utils.GetEnv("LOG_LEVEL", "info")
 var LogFile = utils.GetEnv("LOG_FILE", "")
-var ScheduleTime = utils.GetEnv("TIME_ALGO", "2025-02-13T23:55:00Z")
-var TimeReleaseMatch = utils.GetEnv("TIME_RELEASE_MATCH", "2025-02-14T00:00:00Z")
+var ScheduleTime = utils.GetEnv("TIME_ALGO", "2025-02-12T01:34:00Z") //2025-02-13T23:55:00Z
+var TimeReleaseMatch = utils.GetEnv("TIME_RELEASE_MATCH", "2025-02-12T01:34:00Z") //2025-02-14T00:00:00Z
 
 var MinValueCompatibility, _ = strconv.Atoi(utils.GetEnv("MIN_VALUE_COMPATIBILITY", "40"))
 var BatchSize, _ = strconv.Atoi(utils.GetEnv("BATCH_SIZE", "1000"))
