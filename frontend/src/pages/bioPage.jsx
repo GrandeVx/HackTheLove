@@ -40,6 +40,20 @@ function BioPage() {
     fetchUser();
   }, [navigate]);
 
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = "Non ti consiglio di aggiornare le foto potrebbero andare perse!";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
 
