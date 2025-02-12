@@ -5,9 +5,11 @@ import Header from '@components/header'
 import { Spacer } from "@heroui/spacer";
 import { handleError } from '@utils/utils'
 import { showToast } from '@components/toast'
+import Spinner from '@components/spinner'
 
 export default function MatchPage() {
   const [users, setUsers] = useState([])
+  const [imageLoading, setImageLoading] = useState(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -60,6 +62,7 @@ export default function MatchPage() {
     };
 
     fetchUsers();
+    setImageLoading(false);
   }, []);
 
   return (
@@ -69,13 +72,18 @@ export default function MatchPage() {
       <div className="m-3" id="title">
         <h1 className="text-left text-[1.2rem] font-bold selection:bg-pink-300 selection:text-white">Guarda chi ha ricambiato il like</h1>
       </div>
+      {imageLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-opacity-50">
+          <Spinner color="default" />
+        </div>
+      )} : (
       {users.length === 0 ? (
         <p className='text-center m-3'>Sembra che nessuno abbia ancora ricambiato il tuo like!</p>
       ) : (
         users.map((user, index) => (
           <CardLike userInfo={user} key={index} />
         ))
-      )}
+      )} )
     </div>
   );
 }

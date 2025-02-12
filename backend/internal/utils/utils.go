@@ -5,6 +5,7 @@ import (
 	"net/mail"
 	"os"
 	"strings"
+	"unicode"
 
 	"github.com/go-playground/validator/v10"
 )
@@ -52,4 +53,14 @@ func ValidateSanitazeResponse(response string) bool {
 		}
 	}
 	return true
+}
+
+func CapitalizeWords(s string) string {
+	words := strings.Fields(s)
+	for i, word := range words {
+		if len(word) > 0 {
+			words[i] = string(unicode.ToUpper(rune(word[0]))) + word[1:]
+		}
+	}
+	return strings.Join(words, " ")
 }
