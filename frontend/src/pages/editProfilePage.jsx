@@ -1,4 +1,4 @@
-import { addPhotos, addUserInfo, getUser, getPhotos } from '@api/api';
+import { addUserInfo, getUser } from '@api/api';
 import Header from '@components/header';
 import { showToast } from '@components/toast';
 import { useEffect, useState } from 'react';
@@ -20,10 +20,6 @@ function UpdateProfile() {
 
         if (resultUser?.error) {
           showToast(resultUser.error, 'error');
-        }
-
-        if (resultPhoto?.error) {
-          showToast(resultPhoto.error, 'error');
         }
 
         if (user?.user_info) {
