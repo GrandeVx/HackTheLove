@@ -153,7 +153,9 @@ function BioPage() {
   return (
     <div id="main" className="flex flex-col items-left justify-start min-h-screen px-4 py-6 m-2">
       {loading ? (
-        <Spinner />
+        <div className="absolute inset-0 m-auto flex items-center justify-center opacity-105">
+          <Spinner />
+        </div>
       ) : (
         <>
           <Modal isOpen={isOpen} placement='auto' className='bg-white text-black rounded-lg m-0' onOpenChange={onOpenChange} backdrop="blur" radius="lg">
