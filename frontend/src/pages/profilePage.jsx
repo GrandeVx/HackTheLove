@@ -100,6 +100,7 @@ export default function ProfilePage() {
             src={urls[0] || '/placeholder.jpg'}
             alt="Profile"
             className="w-full h-full object-cover"
+            loading='lazy'
           />
         </div>
 

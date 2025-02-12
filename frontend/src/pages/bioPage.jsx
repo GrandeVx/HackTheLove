@@ -267,6 +267,7 @@ function BioPage() {
             {files.map((file, index) => (
               <div key={index} className="relative">
                 <img
+                  loading='lazy'
                   src={file.preview}
                   alt={`preview-${index}`}
                   className="w-full h-24 object-cover rounded-lg"
