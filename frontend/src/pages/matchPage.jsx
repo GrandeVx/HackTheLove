@@ -9,7 +9,7 @@ import Spinner from '@components/spinner'
 
 export default function MatchPage() {
   const [users, setUsers] = useState([])
-  const [imageLoading, setImageLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -62,7 +62,7 @@ export default function MatchPage() {
     };
 
     fetchUsers();
-    setImageLoading(false);
+    setLoading(false);
   }, []);
 
   return (
@@ -72,7 +72,7 @@ export default function MatchPage() {
       <div className="m-3" id="title">
         <h1 className="text-left text-[1.2rem] font-bold selection:bg-pink-300 selection:text-white">Guarda chi ha ricambiato il like</h1>
       </div>
-      {imageLoading && (
+      {loading && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-opacity-50">
           <Spinner color="default" />
         </div>
