@@ -10,6 +10,7 @@ function UpdateProfile() {
   const [age, setAge] = useState(14);
   const [user, setUser] = useState(null);
   const [classe, setClasse] = useState("");
+  const [sex, setSex] = useState("");
   const [section, setSection] = useState("");
 
   useEffect(() => {
@@ -26,6 +27,7 @@ function UpdateProfile() {
           setClasse(user.user_info.classe || "");
           setSection(user.user_info.section || "A");
           setAge(user.user_info.age || 14)
+          setSex(user.user_info.sex || "true");
         }
 
         setUser(user);
@@ -151,7 +153,7 @@ function UpdateProfile() {
           <div className="mt-5 flex gap-x-4">
             <div className="w-1/2">
               <label className="block text-left font-medium mb-2">Sesso</label>
-              <select id="input-sex" value={user?.user_info?.sex == true ? "true" : "false"} className="bg-white focus:outline-pink-500 text-black rounded-lg py-3 px-4 block w-full">
+              <select id="input-sex" value={sex} onChange={(e) => setSection(e.target.value)} className="bg-white focus:outline-pink-500 text-black rounded-lg py-3 px-4 block w-full">
                 <option value="">Seleziona...</option>
                 <option value="true">Maschio</option>
                 <option value="false">Donna</option>
