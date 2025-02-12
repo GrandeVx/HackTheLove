@@ -19,38 +19,52 @@ export default function ProfilePage() {
   const email = query.get("email");
 
   useEffect(() => {
-    setLoading(true);
-    async function fetchData() {
+    async function fetchUser() {
       try {
-        let userResponse = email ? await getUserByParams(atob(email)) : await getUser();
-        let photoResponse = email ? await getPhotosByParams(atob(email)) : await getPhotos();
-
-        const userError = handleError(userResponse);
-        const photoError = handleError(photoResponse);
-
-        if (userError) {
-          showToast(`Errore nel caricamento del profilo: ${userError.error}`, 'error');
-        } else {
-          setUser(userResponse.data);
+        let response = email ? await getUserByParams(atob(email)) : await getUser();
+        const error = handleError(response);
+        if (error) {
+          showToast(`Errore nel caricamento del profilo: ${error.error}`, 'error');
+          return;
         }
-
-        if (photoError) {
-          showToast(`Errore nel caricamento delle foto: ${photoError.error}`, 'error');
-        } else {
-          const imageUrls = photoResponse.data?.images?.map(image =>
-            image.startsWith('data:image') ? image : `data:image/jpeg;base64,${image}`
-          ) || [];
-          setUrls(imageUrls);
-        }
+        setUser(response.data);
       } catch (error) {
-        showToast('Errore imprevisto nel caricamento', 'error');
-        console.error("Errore nel caricamento:", error);
+        showToast('Errore imprevisto nel caricamento del profilo', 'error');
+        console.error("Error in the fetch of data:", error);
       } finally {
         setLoading(false);
       }
     }
-    fetchData();
+
+    async function fetchPhotos() {
+      try {
+        let response = email ? await getPhotosByParams(atob(email)) : await getPhotos();
+        const error = handleError(response);
+        if (error) {
+          showToast(`Errore nel caricamento delle foto: ${error.error}`, 'error');
+          return;
+        }
+
+        const imageUrls = response.data?.images?.map(image =>
+          image.startsWith('data:image') ? image : `data:image/jpeg;base64,${image}`
+        ) || [];
+
+        setUrls(imageUrls);
+      } catch (error) {
+        showToast('Errore imprevisto nel caricamento delle immagini', 'error');
+        console.error('Errore nel recupero delle foto:', error);
+      }
+    }
+
+    fetchUser();
+    fetchPhotos();
   }, [email]);
+
+  useEffect(() => {
+    if (urls.length > 0) {
+      setImageLoading(false);
+    }
+  }, [urls]);
 
   if (loading) {
     return (
