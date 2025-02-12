@@ -56,6 +56,7 @@ func ValidateSanitazeResponse(response string) bool {
 }
 
 func CapitalizeWords(s string) string {
+	s = strings.ToLower(s)
 	words := strings.Fields(s)
 	for i, word := range words {
 		if len(word) > 0 {
