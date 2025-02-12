@@ -85,18 +85,22 @@ export default function ProfilePage() {
           PROFILO
         </h2>
 
-        {/* Immagine profilo con Skeleton */}
         <div className="relative mx-auto w-24 h-24 bg-gray-200 rounded-full overflow-hidden border-4 border-pink-700">
-          {imageLoading && <Spinner />}
+          {imageLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-opacity-50">
+              <Spinner color="default" />
+            </div>
+          )}
           <img
             src={urls[0] || '/placeholder.jpg'}
             alt="Profile"
             className="w-full h-full object-cover"
             loading="lazy"
-            onLoad={() => setImageLoading(false)}
+            onLoad={() => setTimeout(() => setImageLoading(false), 200)}
             style={{ display: imageLoading ? 'none' : 'block' }}
           />
         </div>
+
 
         <div className="text-center mt-5">
           <h3 className="text-xl font-bold text-black">
