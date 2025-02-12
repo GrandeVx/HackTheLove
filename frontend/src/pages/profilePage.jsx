@@ -4,7 +4,7 @@ import Header from '@components/header';
 import { getUser, getPhotos, getUserByParams, getPhotosByParams } from '@api/api';
 import { useNavigate, useLocation } from 'react-router';
 import { Spacer } from '@heroui/spacer';
-import { Spinner } from '@heroui/spinner';
+import Spinner from "@components/spinner";
 import { handleError } from '@utils/utils';
 import { showToast } from '@components/toast';
 
