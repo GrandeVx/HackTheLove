@@ -17,6 +17,7 @@ import {
 } from "@heroui/modal";
 import { Button } from '@heroui/button';
 
+
 function BioPage() {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
@@ -43,7 +44,7 @@ function BioPage() {
     const selectedFiles = Array.from(e.target.files);
 
     if (selectedFiles.length + files.length > 5) {
-      showToast("⚠️ Puoi caricare un massimo di 5 foto!", 'error');
+      showToast("⚠️ Puoi caricare un massimo di 5 foto!", "error");
       e.target.value = "";
       return;
     }
@@ -51,26 +52,65 @@ function BioPage() {
     const validTypes = ["image/png", "image/jpeg", "image/jpg"];
     const maxSizeMB = 5 * 1024 * 1024; // 5MB in byte
 
-    const filteredFiles = selectedFiles.filter((file) => {
-      if (!validTypes.includes(file.type)) {
-        showToast(`⚠️ Formato non valido: ${file.name}. Usa PNG, JPEG o JPG.`, 'error');
-        return false;
+    const checkMagicBytes = (file) => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const bytes = new Uint8Array(e.target.result).slice(0, 4);
+          const magicNumbers = {
+            png: [0x89, 0x50, 0x4e, 0x47],
+            jpg: [0xff, 0xd8, 0xff, 0xe0],
+          };
+
+          const isValid = Object.values(magicNumbers).some((magic) =>
+            magic.every((byte, index) => byte === bytes[index])
+          );
+
+          resolve(isValid);
+        };
+        reader.readAsArrayBuffer(file.slice(0, 4));
+      });
+    };
+
+    const processFiles = async () => {
+      const filteredFiles = await Promise.all(
+        selectedFiles.map(async (file) => {
+          if (!validTypes.includes(file.type)) {
+            showToast(
+              `⚠️ Formato non valido: ${file.name}. Usa PNG, JPEG o JPG.`,
+              "error"
+            );
+            return null;
+          }
+
+          if (file.size > maxSizeMB) {
+            showToast(`⚠️ L'immagine ${file.name} supera i 5MB!`, "error");
+            return null;
+          }
+
+          const isValidMagicBytes = await checkMagicBytes(file);
+          if (!isValidMagicBytes) {
+            showToast(
+              `⚠️ Il file ${file.name} non ha una firma valida!`,
+              "error"
+            );
+            return null;
+          }
+
+          return {
+            file,
+            preview: URL.createObjectURL(file),
+          };
+        })
+      );
+
+      const validFiles = filteredFiles.filter((file) => file !== null);
+      if (validFiles.length > 0) {
+        setFiles((prevFiles) => [...prevFiles, ...validFiles]);
       }
-      if (file.size > maxSizeMB) {
-        showToast(`⚠️ L'immagine ${file.name} supera i 5MB!`, 'error');
-        return false;
-      }
-      return true;
-    });
+    };
 
-    if (filteredFiles.length === 0) return; // Nessun file valido
-
-    const filesWithPreview = filteredFiles.map((file) => ({
-      file,
-      preview: URL.createObjectURL(file),
-    }));
-
-    setFiles((prevFiles) => [...prevFiles, ...filesWithPreview]);
+    processFiles();
   };
 
   const removeImage = (index) => {
