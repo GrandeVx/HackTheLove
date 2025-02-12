@@ -56,6 +56,7 @@ function HomePage() {
         return uniqueCards;
       });
 
+      setLoading(false);
     } catch (error) {
       showToast('Errore durante la creazione delle carte', 'error');
       console.error('Error during card creation:', error);
@@ -118,7 +119,7 @@ function HomePage() {
     if (user?.email && matches.length === 0) {
       handleMatch();
     }
-    setLoading(false);
+
   }, [user.email]);
 
   return (
