@@ -4,6 +4,7 @@ import Header from '@components/header';
 import { getUser, getPhotos, getUserByParams, getPhotosByParams } from '@api/api';
 import { useNavigate, useLocation } from 'react-router';
 import { Spacer } from '@heroui/spacer';
+import { Skeleton } from '@heroui/react';
 import { handleError } from '@utils/utils';
 import { showToast } from '@components/toast';
 
@@ -11,6 +12,7 @@ export default function ProfilePage() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [imageLoading, setImageLoading] = useState(true);
   const [urls, setUrls] = useState([]);
   const query = new URLSearchParams(useLocation().search);
   const email = query.get("email");
@@ -18,19 +20,12 @@ export default function ProfilePage() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        let response;
-        if (!email) {
-          response = await getUser();
-        } else {
-          response = await getUserByParams(atob(email));
-        }
-
+        let response = email ? await getUserByParams(atob(email)) : await getUser();
         const error = handleError(response);
         if (error) {
           showToast(`Errore nel caricamento del profilo: ${error.error}`, 'error');
           return;
         }
-
         setUser(response.data);
       } catch (error) {
         showToast('Errore imprevisto nel caricamento del profilo', 'error');
@@ -42,13 +37,7 @@ export default function ProfilePage() {
 
     async function fetchPhotos() {
       try {
-        let response;
-        if (!email) {
-          response = await getPhotos();
-        } else {
-          response = await getPhotosByParams(atob(email));
-        }
-
+        let response = email ? await getPhotosByParams(atob(email)) : await getPhotos();
         const error = handleError(response);
         if (error) {
           showToast(`Errore nel caricamento delle foto: ${error.error}`, 'error');
@@ -95,12 +84,16 @@ export default function ProfilePage() {
           PROFILO
         </h2>
 
+        {/* Immagine profilo con Skeleton */}
         <div className="relative mx-auto w-24 h-24 bg-gray-200 rounded-full overflow-hidden border-4 border-pink-700">
+          {imageLoading && <Skeleton className="w-full h-full rounded-full" />}
           <img
             src={urls[0] || '/placeholder.jpg'}
             alt="Profile"
             className="w-full h-full object-cover"
-            loading='lazy'
+            loading="lazy"
+            onLoad={() => setImageLoading(false)}
+            style={{ display: imageLoading ? 'none' : 'block' }}
           />
         </div>
 
@@ -128,23 +121,26 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        {/* Immagini extra */}
+        {/* Galleria immagini con Skeleton */}
         <div className="mt-6">
           <p className="font-bold text-black">GALLERIA:</p>
           <div className="flex gap-2 mt-2">
             {urls.length > 0 ? (
               urls.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`User ${index}`}
-                  className="w-16 h-16 rounded-lg object-cover"
-                />
+                <div key={index} className="w-16 h-16 rounded-lg overflow-hidden relative">
+                  {imageLoading && <Skeleton className="w-full h-full" />}
+                  <img
+                    src={img}
+                    alt={`User ${index}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    onLoad={() => setImageLoading(false)}
+                    style={{ display: imageLoading ? 'none' : 'block' }}
+                  />
+                </div>
               ))
             ) : (
-              <p className="text-sm text-gray-500">
-                Nessuna immagine disponibile
-              </p>
+              <p className="text-sm text-gray-500">Nessuna immagine disponibile</p>
             )}
           </div>
         </div>
