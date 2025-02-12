@@ -4,7 +4,7 @@ import Header from '@components/header';
 import { getUser, getPhotos, getUserByParams, getPhotosByParams } from '@api/api';
 import { useNavigate, useLocation } from 'react-router';
 import { Spacer } from '@heroui/spacer';
-import { Skeleton } from '@heroui/skeleton';
+import { Spinner } from '@heroui/spinner';
 import { handleError } from '@utils/utils';
 import { showToast } from '@components/toast';
 
@@ -87,7 +87,7 @@ export default function ProfilePage() {
 
         {/* Immagine profilo con Skeleton */}
         <div className="relative mx-auto w-24 h-24 bg-gray-200 rounded-full overflow-hidden border-4 border-pink-700">
-          {imageLoading && <Skeleton className="w-full h-full rounded-full" />}
+          {imageLoading && <Spinner />}
           <img
             src={urls[0] || '/placeholder.jpg'}
             alt="Profile"
@@ -129,7 +129,6 @@ export default function ProfilePage() {
             {urls.length > 0 ? (
               urls.map((img, index) => (
                 <div key={index} className="w-16 h-16 rounded-lg overflow-hidden relative">
-                  {imageLoading && <Skeleton className="w-full h-full" />}
                   <img
                     src={img}
                     alt={`User ${index}`}

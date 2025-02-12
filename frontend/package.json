@@ -9,6 +9,7 @@
     "@heroui/modal": "^2.2.8",
     "@heroui/skeleton": "^2.2.6",
     "@heroui/spacer": "^2.2.7",
+    "@heroui/spinner": "^2.2.7",
     "@heroui/system": "^2.4.7",
     "@heroui/theme": "^2.4.6",
     "@react-oauth/google": "^0.12.1",
