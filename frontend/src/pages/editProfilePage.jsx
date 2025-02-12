@@ -155,7 +155,7 @@ function UpdateProfile() {
               <label className="block text-left font-medium mb-2">Sesso</label>
               <select id="input-sex" value={sex} onChange={(e) => setSection(e.target.value)} className="bg-white focus:outline-pink-500 text-black rounded-lg py-3 px-4 block w-full">
                 <option value="">Seleziona...</option>
-                <option value="true">Maschio</option>
+                <option value="true">Uomo</option>
                 <option value="false">Donna</option>
               </select>
             </div>
