@@ -5,6 +5,7 @@ import (
 	_ "embed"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // App
@@ -20,7 +21,7 @@ var RequestPerSecond, _ = strconv.Atoi(utils.GetEnv("REQUEST_PER_SECOND", "50"))
 
 // Security configuration
 var JwtSecret = []byte(utils.GetEnv("SECRET_KEY", "6a7c82a47ab1a29e9ad0cfdba5d013870b8a35ac7050ebdae4d507443e065ae3548a75a592f0c8d42b0f23b34ba046ab374051694eb872039930b4df6bce359c"))
-
+var GoogleClientID = utils.GetEnv("GOOGLE_CLIENT_ID", "443648413060-db3ivje6uto4h1jf0f11e13hb4opmhep.apps.googleusercontent.com")
 // Server
 var AppPort = utils.GetEnv("APP_PORT", "8080")
 var GINMODE = utils.GetEnv("GIN_MODE", "debug")
