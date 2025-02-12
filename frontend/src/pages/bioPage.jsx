@@ -41,13 +41,31 @@ function BioPage() {
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
 
+    // Controllo sul numero massimo di file
     if (selectedFiles.length + files.length > 5) {
-      showToast("Puoi caricare un massimo di 5 foto!", 'error');
+      showToast("⚠️ Puoi caricare un massimo di 5 foto!", 'error');
       e.target.value = "";
       return;
     }
 
-    const filesWithPreview = selectedFiles.map((file) => ({
+    const validTypes = ["image/png", "image/jpeg", "image/jpg"];
+    const maxSizeMB = 5 * 1024 * 1024; // 5MB in byte
+
+    const filteredFiles = selectedFiles.filter((file) => {
+      if (!validTypes.includes(file.type)) {
+        showToast(`⚠️ Formato non valido: ${file.name}. Usa PNG, JPEG o JPG.`, 'error');
+        return false;
+      }
+      if (file.size > maxSizeMB) {
+        showToast(`⚠️ L'immagine ${file.name} supera i 5MB!`, 'error');
+        return false;
+      }
+      return true;
+    });
+
+    if (filteredFiles.length === 0) return; // Nessun file valido
+
+    const filesWithPreview = filteredFiles.map((file) => ({
       file,
       preview: URL.createObjectURL(file),
     }));
@@ -107,7 +125,7 @@ function BioPage() {
     results = await addPhotos(files.map(file => file.file));
     error = handleError(results);
     if (error) {
-      showToast(results.data.message, 'error');
+      showToast(results.data.message || "Errore durante il caricamento delle foto.", 'error');
       return true;
     }
 
@@ -247,7 +265,7 @@ function BioPage() {
                 type="file"
                 multiple
                 max={5}
-                accept="image/png, image/jpeg, image/jpg, image/gif"
+                accept="image/png, image/jpeg, image/jpg"
                 onChange={handleFileChange}
                 className="block w-full text-sm text-white
                       file:me-4 file:py-2 file:px-4
