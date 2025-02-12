@@ -74,7 +74,7 @@ export default function MatchPage() {
         <h1 className="text-left text-[1.2rem] font-bold selection:bg-pink-300 selection:text-white">Guarda chi ha ricambiato il like</h1>
       </div>
       {loading ? (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-200 bg-opacity-50">
+        <div className="absolute inset-0 flex items-center justify-center">
           <Spinner color="default" />
         </div>
       ) : users.length === 0 ? (

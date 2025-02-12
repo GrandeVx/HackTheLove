@@ -2,3 +2,8 @@ Entrare nel container da bash e eseguire
 
 - `psql -U username -d postgres`
 - `TRUNCATE TABLE users CASCADE;`
+
+
+UPDATE matches
+SET like_user2 = 1
+WHERE email_user1 = 'francesco.memoli@iismargheritahackbaronissi.edu.it' AND email_user2 = 'giuseppepio.vicedomini@iismargheritahackbaronissi.edu.it';
