@@ -27,7 +27,7 @@ function UpdateProfile() {
           setClasse(user.user_info.classe || "");
           setSection(user.user_info.section || "A");
           setAge(user.user_info.age || 14)
-          setSex(user.user_info.sex || "true");
+          setSex(user.user_info.sex ? "true" : "false");
         }
 
         setUser(user);
@@ -66,14 +66,13 @@ function UpdateProfile() {
     const section = document.getElementById('input-section').value;
     const bio = document.getElementById('input-bio').value.trim();
     const classe = document.getElementById('input-class').value.trim();
-    const ageData = age;
 
     const data = {
       phone,
       sex: sex === 'true',
       section: section.toUpperCase(),
       bio,
-      age: ageData,
+      age: age,
       classe: parseInt(classe),
     };
 
@@ -136,7 +135,6 @@ function UpdateProfile() {
             <div className="w-1/2">
               <label className="block text-left font-medium mb-2">Sezione</label>
               <select
-
                 id="input-section"
                 value={section}
                 onChange={(e) => setSection(e.target.value)}
@@ -150,10 +148,11 @@ function UpdateProfile() {
             </div>
           </div>
 
+
           <div className="mt-5 flex gap-x-4">
             <div className="w-1/2">
               <label className="block text-left font-medium mb-2">Sesso</label>
-              <select id="input-sex" value={sex} onChange={(e) => setSection(e.target.value)} className="bg-white focus:outline-pink-500 text-black rounded-lg py-3 px-4 block w-full">
+              <select id="input-sex" value={sex} onChange={(e) => setSex(e.target.value)} className="bg-white focus:outline-pink-500 text-black rounded-lg py-3 px-4 block w-full">
                 <option value="">Seleziona...</option>
                 <option value="true">Uomo</option>
                 <option value="false">Donna</option>
