@@ -6,7 +6,7 @@ import 'toastify-js/src/toastify.css';
 import { Spacer } from '@heroui/spacer';
 import { handleError } from '@utils/utils';
 import { Spinner } from '@components/spinner';
-import { Navigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 function UpdateProfile() {
   const [age, setAge] = useState(14);
@@ -18,7 +18,7 @@ function UpdateProfile() {
   const [loading, setLoading] = useState(false);
   const [updatPhoto, setUpdatPhoto] = useState(false);
   const [section, setSection] = useState("");
-  const navigate = Navigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -27,7 +27,8 @@ function UpdateProfile() {
         const user = resultUser.data;
 
         let resPhotos = await getPhotos();
-        if (resPhotos.message === "Request failed with status code 404") {
+        if (resPhotos?.message?.includes("404")) {
+          console.log(resPhotos)
           setUpdatPhoto(true);
         }
 
@@ -119,8 +120,8 @@ function UpdateProfile() {
       const validFiles = filteredFiles.filter((file) => file !== null);
       console.log(validFiles)
       if (validFiles.length > 0) {
-        setFiles((prevFiles) => [...prevFiles, ...validFiles]);
-        setNewFiles((prevFiles) => [...prevFiles, ...validFiles])
+        setFiles([...files, ...validFiles]);
+        setNewFiles(validFiles);
       }
     };
     console.log(files)
@@ -176,7 +177,7 @@ function UpdateProfile() {
       return true;
     }
 
-    results = await addPhotos(files.map(newFiles => newFiles.file));
+    results = await addPhotos(newFiles.map(fileObj => fileObj.file));
     let error = handleError(results);
     if (error) {
       showToast(results.data.message || "Errore durante il caricamento delle foto.", 'error');
