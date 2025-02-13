@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import 'toastify-js/src/toastify.css';
 import { Spacer } from '@heroui/spacer';
 import { handleError } from '@utils/utils';
-import { Spinner } from '@components/spinner';
+import Spinner from '@components/spinner';
 import { useNavigate } from 'react-router';
 
 function UpdateProfile() {
@@ -28,7 +28,6 @@ function UpdateProfile() {
 
         let resPhotos = await getPhotos();
         if (resPhotos?.message?.includes("404")) {
-          console.log(resPhotos)
           setUpdatPhoto(true);
         }
 
