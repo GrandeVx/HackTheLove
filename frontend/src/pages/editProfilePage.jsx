@@ -14,7 +14,6 @@ function UpdateProfile() {
   const [classe, setClasse] = useState("");
   const [sex, setSex] = useState("");
   const [files, setFiles] = useState([]);
-  const [newFiles, setNewFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [updatPhoto, setUpdatPhoto] = useState(false);
   const [section, setSection] = useState("");
@@ -120,11 +119,9 @@ function UpdateProfile() {
       console.log(validFiles)
       if (validFiles.length > 0) {
         setFiles([...files, ...validFiles]);
-        setNewFiles(validFiles);
       }
     };
     console.log(files)
-    console.log(newFiles)
     processFiles();
   };
 
@@ -177,7 +174,7 @@ function UpdateProfile() {
     }
 
     if (updatPhoto) {
-      results = await addPhotos(newFiles.map(fileObj => fileObj.file));
+      results = await addPhotos(files.map(fileObj => fileObj.file));
       let error = handleError(results);
       if (error) {
         showToast(results.data.message || "Errore durante il caricamento delle foto.", 'error');
