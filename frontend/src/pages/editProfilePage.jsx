@@ -27,6 +27,7 @@ function UpdateProfile() {
         const user = resultUser.data;
 
         let resPhotos = await getPhotos();
+        console.log(resPhotos)
         if (resPhotos?.message?.includes("404")) {
           setUpdatPhoto(true);
         }
