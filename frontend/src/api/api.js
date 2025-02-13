@@ -23,7 +23,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error('API Error:', error);
+    // console.error('API Error:', error);
     return Promise.reject(error.response ? error.response.data : { error: 'Network Error' });
   }
 );
