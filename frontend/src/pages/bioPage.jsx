@@ -64,7 +64,7 @@ function BioPage() {
     }
 
     const validTypes = ["image/png", "image/jpeg", "image/jpg"];
-    const maxSizeMB = 5 * 1024 * 1024; // 5MB in byte
+    const maxSizeMB = 2 * 1024 * 1024; // 5MB in byte
 
     const checkMagicBytes = (file) => {
       return new Promise((resolve) => {
