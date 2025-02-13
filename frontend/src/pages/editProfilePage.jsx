@@ -176,11 +176,13 @@ function UpdateProfile() {
       return true;
     }
 
-    results = await addPhotos(newFiles.map(fileObj => fileObj.file));
-    let error = handleError(results);
-    if (error) {
-      showToast(results.data.message || "Errore durante il caricamento delle foto.", 'error');
-      return true;
+    if (updatPhoto) {
+      results = await addPhotos(newFiles.map(fileObj => fileObj.file));
+      let error = handleError(results);
+      if (error) {
+        showToast(results.data.message || "Errore durante il caricamento delle foto.", 'error');
+        return true;
+      }
     }
     return false;
   };
