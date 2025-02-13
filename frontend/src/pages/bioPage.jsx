@@ -64,7 +64,7 @@ function BioPage() {
     }
 
     const validTypes = ["image/png", "image/jpeg", "image/jpg"];
-    const maxSizeMB = 2 * 1024 * 1024; // 5MB in byte
+    const maxSizeMB = 3 * 1024 * 1024; // 5MB in byte
 
     const checkMagicBytes = (file) => {
       return new Promise((resolve) => {
@@ -99,7 +99,7 @@ function BioPage() {
           }
 
           if (file.size > maxSizeMB) {
-            showToast(`⚠️ L'immagine ${file.name} supera i 2MB!`, "error");
+            showToast(`⚠️ L'immagine ${file.name} supera i 3MB!`, "error");
             return null;
           }
 

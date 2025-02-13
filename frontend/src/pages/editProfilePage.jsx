@@ -27,8 +27,7 @@ function UpdateProfile() {
         const user = resultUser.data;
 
         let resPhotos = await getPhotos();
-        if (resPhotos.status === 404) {
-          showToast('Nessuna foto trovata', 'error');
+        if (resPhotos.message === "Request failed with status code 404") {
           setUpdatPhoto(true);
         }
 
@@ -62,7 +61,7 @@ function UpdateProfile() {
     }
 
     const validTypes = ["image/png", "image/jpeg", "image/jpg"];
-    const maxSizeMB = 2 * 1024 * 1024; // 5MB in byte
+    const maxSizeMB = 3 * 1024 * 1024;
 
     const checkMagicBytes = (file) => {
       return new Promise((resolve) => {
@@ -97,7 +96,7 @@ function UpdateProfile() {
           }
 
           if (file.size > maxSizeMB) {
-            showToast(`⚠️ L'immagine ${file.name} supera i 2MB!`, "error");
+            showToast(`⚠️ L'immagine ${file.name} supera i 3MB!`, "error");
             return null;
           }
 
