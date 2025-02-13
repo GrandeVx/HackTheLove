@@ -99,7 +99,7 @@ function BioPage() {
           }
 
           if (file.size > maxSizeMB) {
-            showToast(`⚠️ L'immagine ${file.name} supera i 5MB!`, "error");
+            showToast(`⚠️ L'immagine ${file.name} supera i 2MB!`, "error");
             return null;
           }
 
@@ -184,6 +184,7 @@ function BioPage() {
       showToast(results.data.message || "Errore durante il caricamento delle foto.", 'error');
       return true;
     }
+
 
     return false;
   }
