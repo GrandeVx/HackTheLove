@@ -38,7 +38,7 @@ function HomePage() {
           const photos = await getPhotosByParams(emailToGet);
           const errorPhotos = handleError(photos);
           if (errorPhotos) {
-            showToast(errorPhotos.error, 'error');
+            console.log(errorPhotos.error);
             return null;
           }
 
