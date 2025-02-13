@@ -57,8 +57,8 @@ function BioPage() {
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
 
-    if (selectedFiles.length + files.length > 5) {
-      showToast("⚠️ Puoi caricare un massimo di 5 foto!", "error");
+    if (selectedFiles.length + files.length > 3) {
+      showToast("⚠️ Puoi caricare un massimo di 3 foto!", "error");
       e.target.value = "";
       return;
     }
