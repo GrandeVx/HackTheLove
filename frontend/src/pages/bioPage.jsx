@@ -73,10 +73,11 @@ function BioPage() {
           const bytes = new Uint8Array(e.target.result).slice(0, 4);
           const magicNumbers = {
             png: [0x89, 0x50, 0x4e, 0x47],
-            jpg: [0xff, 0xd8, 0xff, 0xe0],
+            jpg: [0xff, 0xd8, 0xff],
+            jpeg: [0xff, 0xd8, 0xff],
           };
 
-          const isValid = Object.values(magicNumbers).some((magic) =>
+          const isValid = Object.entries(magicNumbers).some(([type, magic]) =>
             magic.every((byte, index) => byte === bytes[index])
           );
 
