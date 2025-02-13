@@ -120,11 +120,12 @@ function BioPage() {
       );
 
       const validFiles = filteredFiles.filter((file) => file !== null);
+      console.log(validFiles)
       if (validFiles.length > 0) {
         setFiles((prevFiles) => [...prevFiles, ...validFiles]);
       }
     };
-
+    console.log(files)
     processFiles();
   };
 
